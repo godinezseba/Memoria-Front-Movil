@@ -12,4 +12,4 @@ services:
       - '19000:19000'
       - '19002:19002'
     environment:
-      - REACT_APP_API_URL=${API_URL:-http://192.168.1.96:8081/v2/graphql}
+      - API_URL=${API_URL:-http://192.168.1.96:8081/v2/graphql}
