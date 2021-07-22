@@ -16,24 +16,27 @@ query GetProduct($id: String!){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     margin: 30,
+  },
+  boxSection: {
+    width: '100%',
   },
   text: {
     color: 'red',
   },
-  boxSectin: {
-    alignSelf: 'center',
-    backgroundColor: 'red',
+  buttonsSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   cameraButton: {
-    alignSelf: 'flex-end',
     alignItems: 'center',
     backgroundColor: 'transparent'
   },
   iconButton: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 40,
   },
 });
@@ -75,7 +78,7 @@ export const BarScan = ({ navigation }) => {
   };
 
   const handleCameraType = () => {
-    setCameraType(Constants.Type.back
+    setCameraType(cameraType === Constants.Type.back
       ? Constants.Type.front
       : Constants.Type.back);
   }
@@ -88,44 +91,45 @@ export const BarScan = ({ navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'black' }}>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
         type={cameraType}
       >
         <View style={styles.container}>
-          <View
-            style={styles.cameraButton}
-          >
-            <Ionicons
-              name="copy-outline"
-              style={{ ...styles.iconButton, opacity: 0 }}
-            />
+          <View style={styles.boxSection}>
+            <Text style={styles.text}>{barCode || 'sin resultados...'}</Text>
           </View>
-          <TouchableOpacity
-            style={styles.cameraButton}
-            onPress={handleSearchBarCode}
-          >
-            <FontAwesome
-              name="camera"
-              style={styles.iconButton}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.cameraButton}
-            onPress={handleCameraType}
-          >
-            <MaterialCommunityIcons
-              name="camera-switch"
-              style={styles.iconButton}
-            />
-          </TouchableOpacity>
+          <View style={styles.buttonsSection}>
+            <View
+              style={styles.cameraButton}
+            >
+              <Ionicons
+                name="copy-outline"
+                style={{ ...styles.iconButton, opacity: 0 }}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.cameraButton}
+              onPress={handleSearchBarCode}
+            >
+              <FontAwesome
+                name="camera"
+                style={styles.iconButton}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cameraButton}
+              onPress={handleCameraType}
+            >
+              <MaterialCommunityIcons
+                name="camera-switch"
+                style={styles.iconButton}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* <View style={styles.container}>
-          <Text style={styles.text}>{barCode || 'sin resultados...'}</Text>
-          <Button title={'Haga click para buscar'} onPress={handleSearchBarCode} />
-        </View> */}
       </BarCodeScanner>
     </View>
   );
