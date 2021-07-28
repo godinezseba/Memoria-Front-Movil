@@ -1,7 +1,11 @@
 import { BarScan } from './BarScan';
 import { Home } from './Screens';
 import { Product } from './ProductInfo';
+import { History } from './History';
 
-export { Home };
-export { BarScan };
-export { Product };
+export {
+  Home,
+  BarScan,
+  Product,
+  History,
+};
