@@ -51,15 +51,11 @@ export const BarScan = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [barCode, setBarCode] = useState('');
   const [cameraType, setCameraType] = useState(Constants.Type.back);
-  const [scanned, setScanned] = useState(false);
   const [getProduct, { loading }] = useLazyQuery(GET_PRODUCT, {
     onCompleted: ({ product }) => {
-      setScanned(false);
-      console.log('entre 2')
       navigation.push('Product', { product });
     },
     onError: ({ message }) => {
-      setScanned(false);
       alert(`Error al buscar el código!\nDetalle: ${message}`);
     }
   });
@@ -76,13 +72,12 @@ export const BarScan = ({ navigation }) => {
   };
 
   const handleSearchBarCode = () => {
-    console.log('entre');
-    // if (barCode !== '') {
-    setScanned(true);
-    getProduct({ variables: { id: '123456789' } });
-    // } else {
-    //   alert(`Error, no se ingreso un código!`);
-    // }
+    if (barCode !== '') {
+      // getProduct({ variables: { id: '123456789' } });
+      getProduct({ variables: { id: barCode } });
+    } else {
+      alert(`Error, no se ingreso un código!`);
+    }
   };
 
   const handleCameraType = () => {
