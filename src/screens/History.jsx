@@ -20,7 +20,7 @@ const ScreenContainer = ({ children }) => (
   <View style={styles.container}>{children}</View>
 );
 
-export default function History() {
+export function History() {
   return (
     <ScreenContainer>
       <Text>Historial</Text>

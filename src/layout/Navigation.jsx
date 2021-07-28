@@ -3,8 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Home, BarScan, Product } from '../screens';
-import History from '../screens/History';
+import { Home, BarScan, Product, History } from '../screens';
 
 const HomeStack = createStackNavigator();
 function HomeStackScreen() {

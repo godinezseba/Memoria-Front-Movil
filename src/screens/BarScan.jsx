@@ -72,12 +72,12 @@ export const BarScan = ({ navigation }) => {
   };
 
   const handleSearchBarCode = () => {
-    if (barCode !== '') {
-      // getProduct({ variables: { id: '123456789' } });
-      getProduct({ variables: { id: barCode } });
-    } else {
-      alert(`Error, no se ingreso un código!`);
-    }
+    getProduct({ variables: { id: '123456789' } });
+    // if (barCode !== '') {
+    //   getProduct({ variables: { id: barCode } });
+    // } else {
+    //   alert(`Error, no se ingreso un código!`);
+    // }
   };
 
   const handleCameraType = () => {
