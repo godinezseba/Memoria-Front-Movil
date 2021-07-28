@@ -1,0 +1,29 @@
+import React from 'react';
+import { Text, StyleSheet, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 10,
+    borderRadius: 5
+  },
+});
+
+const ScreenContainer = ({ children }) => (
+  <View style={styles.container}>{children}</View>
+);
+
+export default function History() {
+  return (
+    <ScreenContainer>
+      <Text>Historial</Text>
+    </ScreenContainer>
+  );
+};
