@@ -9,9 +9,8 @@ import History from '../screens/History';
 const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator headerMode="none">
       <HomeStack.Screen name="Home" component={Home} options={{ title: 'Inicio' }} />
-      <HomeStack.Screen name="Product" component={Product} options={{ title: 'Información' }} />
     </HomeStack.Navigator>
   );
 }
@@ -33,6 +32,7 @@ export default function Navigation() {
     <NavigationContainer>
       <RootStack.Navigator mode="modal" headerMode="none">
         <RootStack.Screen name="Main" component={TabScreen} />
+        <RootStack.Screen name="Product" component={Product} />
         <RootStack.Screen name="BarScan" component={BarScan} />
       </RootStack.Navigator>
     </NavigationContainer>

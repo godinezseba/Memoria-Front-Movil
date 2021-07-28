@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLazyQuery, gql } from '@apollo/client';
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import { BarCodeScanner, Constants } from 'expo-barcode-scanner';
 
 const GET_PRODUCT = gql`
@@ -46,9 +52,10 @@ export const BarScan = ({ navigation }) => {
   const [barCode, setBarCode] = useState('');
   const [cameraType, setCameraType] = useState(Constants.Type.back);
   const [scanned, setScanned] = useState(false);
-  const [getProduct] = useLazyQuery(GET_PRODUCT, {
+  const [getProduct, { loading }] = useLazyQuery(GET_PRODUCT, {
     onCompleted: ({ product }) => {
       setScanned(false);
+      console.log('entre 2')
       navigation.push('Product', { product });
     },
     onError: ({ message }) => {
@@ -69,12 +76,13 @@ export const BarScan = ({ navigation }) => {
   };
 
   const handleSearchBarCode = () => {
-    if (barCode !== '') {
-      setScanned(true);
-      getProduct({ variables: { id: barCode } });
-    } else {
-      alert(`Error, no se ingreso un código!`);
-    }
+    console.log('entre');
+    // if (barCode !== '') {
+    setScanned(true);
+    getProduct({ variables: { id: '123456789' } });
+    // } else {
+    //   alert(`Error, no se ingreso un código!`);
+    // }
   };
 
   const handleCameraType = () => {
@@ -110,15 +118,19 @@ export const BarScan = ({ navigation }) => {
                 style={{ ...styles.iconButton, opacity: 0 }}
               />
             </View>
-            <TouchableOpacity
-              style={styles.cameraButton}
-              onPress={handleSearchBarCode}
-            >
-              <FontAwesome
-                name="camera"
-                style={styles.iconButton}
-              />
-            </TouchableOpacity>
+            {loading ? (
+              <ActivityIndicator />
+            ) : (
+              <TouchableOpacity
+                style={styles.cameraButton}
+                onPress={handleSearchBarCode}
+              >
+                <FontAwesome
+                  name="camera"
+                  style={styles.iconButton}
+                />
+              </TouchableOpacity>
+            )}
             <TouchableOpacity
               style={styles.cameraButton}
               onPress={handleCameraType}
