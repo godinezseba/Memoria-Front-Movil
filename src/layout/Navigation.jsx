@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import { HomeHeader } from '../components/HomeHeader';
 import { Home, BarScan, Product, History } from '../screens';
@@ -16,49 +17,55 @@ function HomeStackScreen() {
         headerTitle: () => <HomeHeader {...props} />,
       })}
     >
-      <HomeStack.Screen name="Home" component={Home} options={{ title: 'Inicio' }} />
+      <HomeStack.Screen name="HomeView" component={Home} options={{ title: 'Inicio' }} />
+      <HomeStack.Screen name="Producto" component={Product} />
+      <HomeStack.Screen name="BarScan" component={BarScan} options={{ headerShown: false }} />
     </HomeStack.Navigator>
   );
 }
 
-const Tab = createBottomTabNavigator();
-function TabScreen() {
+const HistoryStack = createStackNavigator();
+function HistoryStackScreen() {
   return (
-    <Tab.Navigator initialRouteName="Inicio">
-      <Tab.Screen
-        name="Inicio"
-        component={HomeStackScreen}
-        options={{
-          tabBarLabel: 'Inicio',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="barcode-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Historial"
-        component={History}
-        options={{
-          tabBarLabel: 'Historial',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="list-outline" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tab.Navigator >
+    <HistoryStack.Navigator
+      initialRouteName="Historial"
+    >
+      <HistoryStack.Screen name="Producto" component={Product} />
+      <HistoryStack.Screen name="Historial" component={History} />
+    </HistoryStack.Navigator>
   );
 }
 
-const RootStack = createStackNavigator();
+// Add other screen that dont show the tabs
+const getTabBarVisibility = (route) => !(getFocusedRouteNameFromRoute(route) === 'BarScan');
 
+const Tab = createBottomTabNavigator();
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal" headerMode="none" initialRouteName="Main">
-        <RootStack.Screen name="Main" component={TabScreen} />
-        <RootStack.Screen name="Product" component={Product} />
-        <RootStack.Screen name="BarScan" component={BarScan} />
-      </RootStack.Navigator>
+      <Tab.Navigator initialRouteName="Inicio">
+        <Tab.Screen
+          name="HomeTab"
+          component={HomeStackScreen}
+          options={({ route }) => ({
+            tabBarLabel: 'Inicio',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="barcode-outline" size={size} color={color} />
+            ),
+            tabBarVisible: getTabBarVisibility(route),
+          })}
+        />
+        <Tab.Screen
+          name="HistoryTab"
+          component={HistoryStackScreen}
+          options={{
+            tabBarLabel: 'Historial',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="list-outline" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tab.Navigator >
     </NavigationContainer>
   );
 }

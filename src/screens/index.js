@@ -1,5 +1,5 @@
 import { BarScan } from './BarScan';
-import { Home } from './Home/Home';
+import { Home } from './Home';
 import { Product } from './ProductInfo';
 import { History } from './History';
 
