@@ -1,41 +1,36 @@
 import React, { useState } from 'react';
-import { Button, View, StyleSheet, TextInput } from 'react-native';
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5
-  },
-});
-
-const ScreenContainer = ({ children }) => (
-  <View style={styles.container}>{children}</View>
-);
+import { Column, Input, Icon, Center, Row, IconButton } from 'native-base';
+import { Ionicons } from '@expo/vector-icons';
 
 export const Home = ({ navigation }) => {
   const [searchName, setSearchName] = useState('');
-
   return (
-    <ScreenContainer>
-      <TextInput
-        value={searchName}
-        onChangeText={setSearchName}
-        style={styles.input}
-      />
-      <Button title="Buscar" onPress={() => navigation.push("BarScan")} />
-    </ScreenContainer>
+    <Center flex={1} px={2}>
+      <Column space={8} width="100%">
+        <Row w="100%" alignItems="center" justifyContent="space-between">
+          <Input
+            placeholder="Buscar por nombre..."
+            variant="filled"
+            width="80%"
+            bg="gray.200"
+            colorScheme="gray"
+            borderRadius={10}
+            py={1}
+            px={2}
+            _web={{
+              _focus: { borderColor: 'muted.300', style: { boxShadow: 'none' } },
+            }}
+            InputLeftElement={<Icon size='sm' ml={2} size={5} color="gray.400" as={<Ionicons name="ios-search" />} />}
+            value={searchName}
+            onChangeText={setSearchName}
+          />
+          <IconButton
+            colorScheme="gray"
+            icon={<Icon as={Ionicons} name="barcode-sharp" color="gray.500" />}
+            onPress={() => navigation.push("BarScan")}
+          />
+        </Row>
+      </Column>
+    </Center>
   );
 }

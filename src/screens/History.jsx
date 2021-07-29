@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
+import { ProductCard } from '../components';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,6 +25,7 @@ export function History() {
   return (
     <ScreenContainer>
       <Text>Historial</Text>
+      <ProductCard />
     </ScreenContainer>
   );
 };
