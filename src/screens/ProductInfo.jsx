@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Accordion, Center, Box, Icon, Tabs } from 'native-base';
+import { Accordion, Box, Icon, Tabs } from 'native-base';
 
 const defaultProduct = {
   barcode_id: '',
@@ -17,8 +17,8 @@ export const Product = ({ route }) => {
   const product = route.params?.product ? route.params.product : defaultProduct;
 
   return (
-    <Center flex={1}>
-      <Tabs onChange={setTypeResult} index={typeResult} align="center">
+    <Box safeArea>
+      <Tabs onChange={setTypeResult} index={typeResult} isFitted>
         <Tabs.Bar>
           <Tabs.Tab>Global</Tabs.Tab>
           <Tabs.Tab>Categorico</Tabs.Tab>
@@ -28,7 +28,7 @@ export const Product = ({ route }) => {
         {product.name}
       </Box>
       <Box m={3}>
-        <Accordion index={[0, 1]}>
+        <Accordion allowMultiple>
           <Accordion.Item>
             <Accordion.Summary>
               ¿Cómo se obtuvo este resultado?
@@ -52,6 +52,6 @@ export const Product = ({ route }) => {
           </Accordion.Item>
         </Accordion>
       </Box>
-    </Center>
+    </Box>
   );
 };
