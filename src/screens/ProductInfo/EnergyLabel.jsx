@@ -31,12 +31,7 @@ export const EnergyLabel = (props) => {
 
   // fade effect in the first render
   const firstUpdate = useRef(true);
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-  });
+  firstUpdate.current = false;
 
   if (firstUpdate)
     return (

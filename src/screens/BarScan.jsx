@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLazyQuery, gql } from '@apollo/client';
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   Text,
@@ -9,15 +8,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { BarCodeScanner, Constants } from 'expo-barcode-scanner';
-
-const GET_PRODUCT = gql`
-query GetProduct($id: String!){
-  product(id: $id) {
-    id
-    name
-  }
-}
-`;
 
 const styles = StyleSheet.create({
   container: {
@@ -51,14 +41,6 @@ export const BarScan = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [barCode, setBarCode] = useState('');
   const [cameraType, setCameraType] = useState(Constants.Type.back);
-  const [getProduct, { loading }] = useLazyQuery(GET_PRODUCT, {
-    onCompleted: ({ product }) => {
-      navigation.push('Product', { product });
-    },
-    onError: ({ message }) => {
-      alert(`Error al buscar el código!\nDetalle: ${message}`);
-    }
-  });
 
   useEffect(() => {
     (async () => {
@@ -72,7 +54,8 @@ export const BarScan = ({ navigation }) => {
   };
 
   const handleSearchBarCode = () => {
-    getProduct({ variables: { id: '123456789' } });
+    navigation.push('Producto', { productId: '109fedfb1cbd216feb88d69476cb3a35' });
+    // getProduct({ variables: { id: '123456789' } });
     // if (barCode !== '') {
     //   getProduct({ variables: { id: barCode } });
     // } else {
