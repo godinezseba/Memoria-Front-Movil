@@ -11,33 +11,44 @@ const labelsWith = {
   'e': 140,
 };
 
-const styleLabel = (character) => StyleSheet.create({
+const style = StyleSheet.create({
   label: {
     backgroundColor: 'transparent',
   },
   labelText: {
     textTransform: 'uppercase',
     color: 'white',
-    fontSize: 26,
     fontWeight: 'bold',
+  },
+  labelSquare: {
+    justifyContent: 'center',
+  },
+  labelTriangle: {
+    position: 'absolute',
+    top: 0,
+    width: 0,
+    height: 0,
+    borderTopColor: 'transparent',
+    borderBottomColor: 'transparent',
+  },
+})
+
+const styleLabel = (character) => StyleSheet.create({
+  labelText: {
+    fontSize: 26,
   },
   labelSquare: {
     width: labelsWith[character],
     height: 26,
     backgroundColor: colors[character],
+    paddingLeft: 5,
   },
   labelTriangle: {
-    position: 'absolute',
     left: labelsWith[character],
-    top: 0,
-    width: 0,
-    height: 0,
-    borderTopColor: 'transparent',
     borderTopWidth: 13,
-    borderLeftWidth: 26,
+    borderLeftWidth: 13,
     borderLeftColor: colors[character],
     borderBottomWidth: 13,
-    borderBottomColor: 'transparent',
   },
 });
 
@@ -49,46 +60,48 @@ const styleBlackLabel = StyleSheet.create({
     width: 30,
     height: 30,
     backgroundColor: 'black',
+    alignItems: 'center',
   },
   labelTriangle: {
-    position: 'absolute',
-    left: -30,
-    top: 0,
-    width: 0,
-    height: 0,
-    borderTopColor: 'transparent',
+    left: -15,
     borderTopWidth: 15,
-    borderRightWidth: 30,
+    borderRightWidth: 15,
     borderRightColor: 'black',
     borderBottomWidth: 15,
-    borderBottomColor: 'transparent',
   },
 });
 
-const styleText = StyleSheet.compose(styleLabel().labelText, styleBlackLabel.labelText);
-
 export const Label = (props) => {
   const character = props.character || 'a';
+  const styleSquare = StyleSheet.compose(style.labelSquare, styleLabel(character).labelSquare);
+  const styleText = StyleSheet.compose(style.labelText, styleLabel().labelText);
+  const styleTriangle = StyleSheet.compose(style.labelTriangle, styleLabel(character).labelTriangle);
+
   return (
-    <View style={styleLabel(character).label}>
-      <View style={styleLabel(character).labelSquare}>
-        <Text style={styleLabel().labelText}>{character}
+    <View style={style.label}>
+      <View style={styleSquare}>
+        <Text style={styleText}>
+          {character}
         </Text>
       </View>
-      <View style={styleLabel(character).labelTriangle} />
+      <View style={styleTriangle} />
     </View>
   );
 };
 
 export const BlackLabel = (props) => {
   const character = props.character || 'a';
+  const styleSquare = StyleSheet.compose(style.labelSquare, styleBlackLabel.labelSquare);
+  const styleText = StyleSheet.compose(style.labelText, styleBlackLabel.labelText);
+  const styleTriangle = StyleSheet.compose(style.labelTriangle, styleBlackLabel.labelTriangle);
+
   return (
-    <View style={styleLabel().label}>
-      <View style={styleBlackLabel.labelSquare}>
+    <View style={style.label}>
+      <View style={styleSquare}>
         <Text style={styleText}>{character}
         </Text>
       </View>
-      <View style={styleBlackLabel.labelTriangle} />
+      <View style={styleTriangle} />
     </View>
   );
 };
