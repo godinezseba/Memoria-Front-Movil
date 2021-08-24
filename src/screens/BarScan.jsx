@@ -96,19 +96,15 @@ export const BarScan = ({ navigation }) => {
                 style={{ ...styles.iconButton, opacity: 0 }}
               />
             </View>
-            {loading ? (
-              <ActivityIndicator />
-            ) : (
-              <TouchableOpacity
-                style={styles.cameraButton}
-                onPress={handleSearchBarCode}
-              >
-                <FontAwesome
-                  name="camera"
-                  style={styles.iconButton}
-                />
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity
+              style={styles.cameraButton}
+              onPress={handleSearchBarCode}
+            >
+              <FontAwesome
+                name="camera"
+                style={styles.iconButton}
+              />
+            </TouchableOpacity>
             <TouchableOpacity
               style={styles.cameraButton}
               onPress={handleCameraType}

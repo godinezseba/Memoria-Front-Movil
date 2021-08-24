@@ -20,6 +20,16 @@ query GetProduct($id: ID!){
     }
     company {
       name
+      rating {
+        CO2
+        water
+        deforestation
+      }
+      labels {
+        label
+        labelCO2
+        labelwater
+      }
     }
     globalLabels {
       label
@@ -41,7 +51,7 @@ export const Product = ({ route }) => {
   if (!productId && !searching)
     return (
       <Box safeArea>
-        <VStack space={2} alignItems="center" width="100%">
+        <VStack space={2} alignItems='center' width='100%'>
           <Heading mt={3}>No deberias estar aquí... </Heading>
         </VStack>
       </Box>
@@ -51,7 +61,7 @@ export const Product = ({ route }) => {
   if (error)
     return (
       <Box safeArea>
-        <VStack space={2} alignItems="center" width="100%">
+        <VStack space={2} alignItems='center' width='100%'>
           <Heading mt={3}>Error al buscar el producto </Heading>
         </VStack>
       </Box>
