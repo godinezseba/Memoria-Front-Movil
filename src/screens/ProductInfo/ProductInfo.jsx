@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import { Accordion, Box, Icon, Tabs, Heading, Text } from 'native-base';
+import { Accordion, Box, Icon, Tabs, Heading, Text, Column } from 'native-base';
 
 import { EnergyLabel } from './EnergyLabel';
+import { numberToChar } from '../../constants/labels';
 
 export const ProductInfo = (props) => {
-  const { product, product: { globalLabels, categoryLabels } } = props;
+  const { product, product: { globalLabels, categoryLabels, ratingData } } = props;
   const [typeResult, setTypeResult] = useState(0);
 
   const InfoSection = () => {
     const labels = typeResult === 0 ? globalLabels : categoryLabels;
-    return typeResult === 0 ? (<Text>Valores globales</Text>) : (<Text>Valores en su categoria</Text>);
+    const labelwater = numberToChar[labels.labelwater].toUpperCase();
+    const labelCO2 = numberToChar[labels.labelCO2].toUpperCase();
+    return (
+      <Column>
+        <Text>{`Consumo de agua: ${ratingData.water.toFixed(2)} Kg/u (${labelwater})`}</Text>
+        <Text>{`Emisión de CO2: ${ratingData.CO2.toFixed(2)} L/u (${labelCO2})`}</Text>
+        <Text>{`Afecta a la deforestación: ${ratingData.deforestation}`}</Text>
+      </Column>
+    );
   }
 
   return (
