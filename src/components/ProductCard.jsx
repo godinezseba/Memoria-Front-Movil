@@ -1,22 +1,38 @@
 import React from 'react';
-import { VStack, Box, Divider } from 'native-base';
+import { Row, Pressable, Center, Text, Column } from 'native-base';
 
-export default function ProductCard() {
+import { colors, numberToChar } from '../constants/labels';
+
+export default function ProductCard(props) {
+  const { product, onPress } = props;
+  const { globalLabels: { label } } = product;
+  const labelChar = numberToChar[label];
   return (
-    <Box border={1} borderRadius='md'>
-      <VStack space={4} divider={<Divider />}>
-        <Box px={4} pt={4}>
-          NativeBase
-        </Box>
-        <Box px={4}>
-          NativeBase is a free and open source framework that enable developers
-          to build high-quality mobile apps using React Native iOS and Android
-          apps with a fusion of ES6.
-        </Box>
-        <Box px={4} pb={4}>
-          GeekyAnts
-        </Box>
-      </VStack>
-    </Box>
+    <Pressable
+      border={1}
+      borderRadius="md"
+      p={1}
+      onPress={onPress}
+    >
+      <Row space={2}>
+        <Center height={20} width={20} bgColor={colors[labelChar]}>
+          <Text
+            fontSize="6xl"
+            color="white"
+            textTransform="uppercase"
+          >
+            {labelChar}
+          </Text>
+        </Center>
+        <Column>
+          <Text>
+            {product.name}
+          </Text>
+          <Text fontSize="xs">
+            {product.category}
+          </Text>
+        </Column>
+      </Row>
+    </Pressable>
   );
 }

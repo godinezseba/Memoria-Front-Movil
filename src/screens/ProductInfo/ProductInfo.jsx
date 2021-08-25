@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Accordion, Box, Icon, Tabs, Heading, Text, Column, ScrollView } from 'native-base';
-// import { ScrollView } from 'react-native';
 
 import { EnergyLabel } from './EnergyLabel';
 import { numberToChar } from '../../constants/labels';

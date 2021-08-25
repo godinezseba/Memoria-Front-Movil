@@ -5,7 +5,6 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  ActivityIndicator,
 } from 'react-native';
 import { BarCodeScanner, Constants } from 'expo-barcode-scanner';
 
@@ -37,7 +36,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export const BarScan = ({ navigation }) => {
+export const BarScan = (props) => {
+  const { navigation } = props;
   const [hasPermission, setHasPermission] = useState(null);
   const [barCode, setBarCode] = useState('');
   const [cameraType, setCameraType] = useState(Constants.Type.back);
