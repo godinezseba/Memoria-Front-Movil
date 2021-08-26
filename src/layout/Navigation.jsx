@@ -7,6 +7,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import { HomeHeader } from '../components/HomeHeader';
 import { Home, BarScan, Product, History } from '../screens';
+import { navigationRef } from '../store/navigationContext';
 
 const HomeStack = createStackNavigator();
 function HomeStackScreen() {
@@ -42,7 +43,7 @@ const getTabBarVisibility = (route) => !(getFocusedRouteNameFromRoute(route) ===
 const Tab = createBottomTabNavigator();
 export default function Navigation() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Tab.Navigator initialRouteName="Inicio">
         <Tab.Screen
           name="HomeTab"

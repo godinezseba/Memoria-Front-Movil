@@ -2,29 +2,27 @@ import React, { useState } from 'react';
 import { Accordion, Box, Icon, Tabs, Heading, Text, Column, ScrollView } from 'native-base';
 
 import { EnergyLabel } from './EnergyLabel';
-import { numberToChar } from '../../constants/labels';
+import { floatToChar } from '../../constants/labels';
 
 const nullText = 'No definido';
+
+const InfoSection = (props) => {
+  const { labels, rating } = props;
+  const labelwater = floatToChar(labels.labelwater).toUpperCase();
+  const labelCO2 = floatToChar(labels.labelCO2).toUpperCase();
+  return (
+    <>
+      <Text>{`Consumo de agua: ${(rating.water || 0).toFixed(2)} L/u (${labelwater || nullText})`}</Text>
+      <Text>{`Emisión de CO2: ${(rating.CO2 || 0).toFixed(2)} Kg/u (${labelCO2 || nullText})`}</Text>
+      <Text>{`Afecta a la deforestación: ${rating.deforestation || nullText}`}</Text>
+    </>
+  );
+}
 
 export const ProductInfo = (props) => {
   const { product: { globalLabels, categoryLabels, ratingData, company, name } } = props;
   const { name: nameCompany, rating: ratingCompany, labels: companyLabels } = company;
-  const { labelwater, labelCO2 } = companyLabels || {};
-
   const [typeResult, setTypeResult] = useState(0);
-
-  const InfoSection = () => {
-    const labels = typeResult === 0 ? globalLabels : categoryLabels;
-    const labelwater = numberToChar[labels.labelwater].toUpperCase();
-    const labelCO2 = numberToChar[labels.labelCO2].toUpperCase();
-    return (
-      <Column>
-        <Text>{`Consumo de agua: ${(ratingData.water || 0).toFixed(2)} Kg/u (${labelwater || nullText})`}</Text>
-        <Text>{`Emisión de CO2: ${(ratingData.CO2 || 0).toFixed(2)} L/u (${labelCO2 || nullText})`}</Text>
-        <Text>{`Afecta a la deforestación: ${ratingData.deforestation || nullText}`}</Text>
-      </Column>
-    );
-  }
 
   return (
     <Box>
@@ -47,7 +45,12 @@ export const ProductInfo = (props) => {
                 <Icon name="snowflake" type="MaterialCommunityIcons" />
               </Accordion.Summary>
               <Accordion.Details>
-                <InfoSection />
+                <Column>
+                  <InfoSection
+                    labels={typeResult === 0 ? globalLabels : categoryLabels}
+                    rating={ratingData}
+                  />
+                </Column>
               </Accordion.Details>
             </Accordion.Item>
             <Accordion.Item>
@@ -58,9 +61,7 @@ export const ProductInfo = (props) => {
               <Accordion.Details>
                 <Column>
                   <Text>Este producto es de la empresa <Text bold>{nameCompany}</Text></Text>
-                  <Text>{`Consumo de agua: ${(ratingCompany.water || 0).toFixed(2)} Kg/u (${labelwater || nullText})`}</Text>
-                  <Text>{`Emisión de CO2: ${(ratingCompany.CO2 || 0).toFixed(2)} L/u (${labelCO2 || nullText})`}</Text>
-                  <Text>{`Afecta a la deforestación: ${ratingCompany.deforestation || nullText}`}</Text>
+                  <InfoSection labels={companyLabels} rating={ratingCompany} />
                 </Column>
               </Accordion.Details>
             </Accordion.Item>

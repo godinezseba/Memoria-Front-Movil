@@ -2,13 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import { Row, Column, Box, Fade } from 'native-base';
 
 import { Label, BlackLabel } from '../../components/Labels';
-import { numberToChar } from '../../constants/labels';
+import { floatToChar } from '../../constants/labels';
 
 const letters = ['a', 'b', 'c', 'd', 'e'];
 
 export const EnergyLabel = (props) => {
   let label = props.label || '1';
-  label = numberToChar[label];
+  label = floatToChar(label);
 
   const Labels = () => (
     <Box my={5}>

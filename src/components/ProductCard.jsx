@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row, Pressable, Center, Text, Column } from 'native-base';
 
-import { colors, numberToChar } from '../constants/labels';
+import { colors, floatToChar } from '../constants/labels';
 
 export default function ProductCard(props) {
   const { product, onPress } = props;
   const { globalLabels: { label } } = product;
-  const labelChar = numberToChar[label];
+  const labelChar = floatToChar(label);
   return (
     <Pressable
       border={1}

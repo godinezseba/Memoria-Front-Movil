@@ -6,10 +6,10 @@ export const colors = {
   'e': '#e30613',
 }
 
-export const numberToChar = {
-  '1': 'a',
-  '2': 'b',
-  '3': 'c',
-  '4': 'd',
-  '5': 'e',
+export const floatToChar = (number) => {
+  if (number < 1.5) return 'a';
+  if (number < 2.5) return 'b';
+  if (number < 3.5) return 'c';
+  if (number < 4.5) return 'd';
+  else return 'e';
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Spinner, Text, Center } from 'native-base';
 import { gql, useLazyQuery } from '@apollo/client';
 
-import { ProductCard } from '../components';
+import { ProductList } from '../components';
 import { getProducts } from '../services/historyProducts';
 
 const GET_PRODUCTS = gql`
@@ -21,8 +21,7 @@ query GetProducts($ids: [ID]){
 }
 `;
 
-export function History(props) {
-  const { navigation } = props;
+export function History() {
   const [loading, setLoading] = useState(true);
   const [getProductsQuery, { data }] = useLazyQuery(GET_PRODUCTS, { onCompleted: () => setLoading(false) });
 
@@ -37,11 +36,6 @@ export function History(props) {
       });
   }, []);
 
-  const handleClickProduct = (product) => {
-    console.log(product)
-    navigation.push('Producto', { productId: product.id })
-  }
-
   if (loading)
     return (
       <Center flex={1}>
@@ -52,15 +46,7 @@ export function History(props) {
   const { products } = data || {};
   if (products)
     return (
-      <Box m={3}>
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onPress={() => handleClickProduct(product)}
-          />
-        ))}
-      </Box>
+      <ProductList products={products} />
     );
 
   return (
