@@ -1,10 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Row, Column, Box, Fade } from 'native-base';
 
 import { Label, BlackLabel } from '../../components/Labels';
-import { floatToChar } from '../../constants/labels';
-
-const letters = ['a', 'b', 'c', 'd', 'e'];
+import { floatToChar, letters } from '../../constants/labels';
 
 export const EnergyLabel = (props) => {
   let label = props.label || '1';

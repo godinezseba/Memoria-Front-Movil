@@ -17,6 +17,9 @@ query GetProducts($ids: [ID]){
     categoryLabels {
       label
     }
+    company {
+      name
+    }
   }
 }
 `;

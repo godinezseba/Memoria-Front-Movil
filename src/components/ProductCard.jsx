@@ -5,14 +5,12 @@ import { colors, floatToChar } from '../constants/labels';
 
 export default function ProductCard(props) {
   const { product, onPress } = props;
-  const { globalLabels: { label } } = product;
+  const { globalLabels: { label }, company, categoryLabels } = product;
   const labelChar = floatToChar(label);
   return (
     <Pressable
-      border={1}
-      borderRadius="md"
-      p={1}
       onPress={onPress}
+      backgroundColor="white"
     >
       <Row space={2}>
         <Center height={20} width={20} bgColor={colors[labelChar]}>
@@ -24,12 +22,17 @@ export default function ProductCard(props) {
             {labelChar}
           </Text>
         </Center>
-        <Column>
+        <Column space={1} py={1}>
+          <Row space={5}>
+            <Text>
+              {product.name}
+            </Text>
+            <Text fontSize="xs">
+              {product.category}
+            </Text>
+          </Row>
           <Text>
-            {product.name}
-          </Text>
-          <Text fontSize="xs">
-            {product.category}
+            {company.name}
           </Text>
         </Column>
       </Row>

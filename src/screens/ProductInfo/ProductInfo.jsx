@@ -1,21 +1,37 @@
 import React, { useState } from 'react';
-import { Accordion, Box, Icon, Tabs, Heading, Text, Column, ScrollView } from 'native-base';
+import {
+  Accordion,
+  Box,
+  Icon,
+  Tabs,
+  Heading,
+  Text,
+  Column,
+  ScrollView,
+  Row,
+} from 'native-base';
 
 import { EnergyLabel } from './EnergyLabel';
-import { floatToChar } from '../../constants/labels';
+import { floatToChar, colors } from '../../constants/labels';
 
 const nullText = 'No definido';
 
 const InfoSection = (props) => {
   const { labels, rating } = props;
-  const labelwater = floatToChar(labels.labelwater).toUpperCase();
-  const labelCO2 = floatToChar(labels.labelCO2).toUpperCase();
+  const labelwater = floatToChar(labels.labelwater);
+  const labelCO2 = floatToChar(labels.labelCO2);
   return (
-    <>
-      <Text>{`Consumo de agua: ${(rating.water || 0).toFixed(2)} L/u (${labelwater || nullText})`}</Text>
-      <Text>{`Emisión de CO2: ${(rating.CO2 || 0).toFixed(2)} Kg/u (${labelCO2 || nullText})`}</Text>
+    <Column>
+      <Row width="100%" justifyContent="space-between">
+        <Text>Consumo de agua (<Text bold color={colors[labelwater]}>{labelwater.toUpperCase() || nullText}</Text>):</Text>
+        <Text>{`${(rating.water || 0).toFixed(2)} L/u`}</Text>
+      </Row>
+      <Row width="100%" justifyContent="space-between">
+        <Text>Emisión de CO2 (<Text bold color={colors[labelCO2]}>{labelCO2.toUpperCase() || nullText}</Text>):</Text>
+        <Text>{`${(rating.CO2 || 0).toFixed(2)} Kg/u`}</Text>
+      </Row>
       <Text>{`Afecta a la deforestación: ${rating.deforestation || nullText}`}</Text>
-    </>
+    </Column>
   );
 }
 

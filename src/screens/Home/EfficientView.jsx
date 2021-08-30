@@ -16,6 +16,9 @@ query {
     categoryLabels {
       label
     }
+    company {
+      name
+    }
   }
 }
 `;

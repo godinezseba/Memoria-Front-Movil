@@ -12,7 +12,7 @@ export const Home = () => {
           <Tabs.Tab>Más buscados</Tabs.Tab>
         </Tabs.Bar>
         <Tabs.Views>
-          <Tabs.View>
+          <Tabs.View p={0}>
             <EfficientView />
           </Tabs.View>
           <Tabs.View>

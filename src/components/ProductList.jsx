@@ -6,7 +6,7 @@ import ProductCard from './ProductCard';
 
 export default function ProductList(props) {
   let { products } = props;
-  products = products.slice(0, 10);
+  // products = products.slice(0, 10);
 
   const handleClickProduct = (product) => {
     RootNavigation.push('Producto', { productId: product.id });
@@ -14,7 +14,7 @@ export default function ProductList(props) {
 
   return (
     <ScrollView>
-      <Box m={3}>
+      <Box my={3} mx={0}>
         <Column space={3}>
           {products.map((product) => (
             <ProductCard
