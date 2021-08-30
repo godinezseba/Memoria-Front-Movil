@@ -8,6 +8,4 @@ RUN yarn global add expo-cli
 
 RUN yarn install
 
-# RUN yarn build
-
 CMD ["yarn", "run", "start"]
