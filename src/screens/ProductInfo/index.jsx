@@ -28,6 +28,19 @@ query GetProduct($id: ID!){
         labelCO2
         labelwater
       }
+      certificates{
+        name
+        companyId
+        companyType
+        fileId
+      }
+      actions{
+        name
+        fileId
+        description
+        companyId
+        companyType
+      }
     }
     globalLabels {
       label

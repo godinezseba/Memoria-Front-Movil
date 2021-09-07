@@ -42,6 +42,6 @@ export function EfficientView() {
 
   const { products } = data;
   return (
-    <ProductList products={products} />
+    <ProductList products={products.slice(0, 20)} />
   );
 }

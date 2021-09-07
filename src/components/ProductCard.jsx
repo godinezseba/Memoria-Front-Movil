@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Pressable, Center, Text, Column } from 'native-base';
+import { Row, Pressable, Center, Text, Column, Divider } from 'native-base';
 
 import { colors, floatToChar } from '../constants/labels';
 
@@ -23,7 +23,7 @@ export default function ProductCard(props) {
           </Text>
         </Center>
         <Column space={1} py={1}>
-          <Row space={5}>
+          <Row space={5} alignItems="baseline">
             <Text>
               {product.name}
             </Text>
@@ -31,9 +31,15 @@ export default function ProductCard(props) {
               {product.category}
             </Text>
           </Row>
-          <Text>
-            {company.name}
-          </Text>
+          <Divider />
+          <Row space={2} alignItems="baseline">
+            <Text fontSize="xs">
+              Empresa
+            </Text>
+            <Text >
+              {company.name}
+            </Text>
+          </Row>
         </Column>
       </Row>
     </Pressable>
