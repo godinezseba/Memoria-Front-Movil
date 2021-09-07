@@ -10,8 +10,10 @@ import {
   ScrollView,
   Row,
   Divider,
+  Pressable,
 } from 'native-base';
 import { Feather, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import { EnergyLabel } from './EnergyLabel';
 import { floatToChar, colors } from '../../constants/labels';
@@ -55,6 +57,7 @@ export const ProductInfo = (props) => {
     certificates,
   } = company;
   const [typeResult, setTypeResult] = useState(0);
+  const navigation = useNavigation();
 
   return (
     <Box>
@@ -118,7 +121,7 @@ export const ProductInfo = (props) => {
                       {certificates.map((certificate, index) => {
                         const { name, fileId } = certificate;
                         return (
-                          <Fragment key={fileId}>
+                          <Pressable key={fileId} onPress={() => navigation.push('Archivo', { fileId: fileId })}>
                             <Divider my={2} />
                             <Row justifyContent="space-between">
                               <Row justifyContent="flex-start">
@@ -130,7 +133,7 @@ export const ProductInfo = (props) => {
                                 <Text>{nameCompany}</Text>
                               </Row>
                             </Row>
-                          </Fragment>
+                          </Pressable>
                         )
                       })}
                     </Fragment>

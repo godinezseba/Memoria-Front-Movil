@@ -5,7 +5,7 @@ import { colors, floatToChar } from '../constants/labels';
 
 export default function ProductCard(props) {
   const { product, onPress } = props;
-  const { globalLabels: { label }, company, categoryLabels } = product;
+  const { globalLabels: { label }, company } = product;
   const labelChar = floatToChar(label);
   return (
     <Pressable

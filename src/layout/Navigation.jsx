@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import { HomeHeader } from '../components/HomeHeader';
-import { Home, BarScan, Product, History } from '../screens';
+import { Home, BarScan, Product, History, File } from '../screens';
 import { navigationRef } from '../store/navigationContext';
 
 const HomeStack = createStackNavigator();
@@ -20,6 +20,7 @@ function HomeStackScreen() {
     >
       <HomeStack.Screen name="HomeView" component={Home} options={{ title: 'Inicio' }} />
       <HomeStack.Screen name="Producto" component={Product} />
+      <HomeStack.Screen name="Archivo" component={File} />
       <HomeStack.Screen name="BarScan" component={BarScan} options={{ headerShown: false }} />
     </HomeStack.Navigator>
   );
@@ -32,6 +33,7 @@ function HistoryStackScreen() {
       initialRouteName="Historial"
     >
       <HistoryStack.Screen name="Producto" component={Product} />
+      <HistoryStack.Screen name="Archivo" component={File} />
       <HistoryStack.Screen name="Historial" component={History} />
     </HistoryStack.Navigator>
   );
