@@ -112,12 +112,7 @@ export const Product = ({ route }) => {
   const { params } = route || {};
   const { productId, searching } = params || {};
   const isFromId = Boolean(productId);
-  if (!isFromId && !searching)
-    return (
-      <Center flex={1}>
-        <Text mt={3}>No deberias estar aquí... </Text>
-      </Center>
-    );
+
   const variables = isFromId ? { id: productId } : { filters: searching };
   const { loading, error, data } = useQuery(
     isFromId ? GET_PRODUCT : GET_PRODUCT_BY_BARCODE,
@@ -127,11 +122,12 @@ export const Product = ({ route }) => {
         if (isFromId) {
           const { product: { id } } = result;
           saveProduct(id);
-        }
-        const { products } = result;
-        if (products.length === 1) {
-          const { id } = products[0];
-          saveProduct(id);
+        } else {
+          const { products } = result;
+          if (products.length === 1) {
+            const { id } = products[0];
+            saveProduct(id);
+          }
         }
       },
     });

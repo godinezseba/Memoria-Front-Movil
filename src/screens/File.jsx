@@ -39,7 +39,6 @@ export const File = ({ route }) => {
     );
 
   const { file } = data;
-  console.log(file);
   return (
     <PDFReader source={{ base64: file.file }} />
   );

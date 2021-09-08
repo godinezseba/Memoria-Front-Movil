@@ -16,44 +16,44 @@ import { Feather, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import { EnergyLabel } from './EnergyLabel';
-import { floatToChar, colors } from '../../constants/labels';
+import { floatToChar, colors, intToDeforestation } from '../../constants/labels';
 
 const nullText = 'No definido';
 
 const InfoSection = (props) => {
-  const { labels, rating } = props;
-  const labelwater = floatToChar(labels.labelwater);
-  const labelCO2 = floatToChar(labels.labelCO2);
+  const { labels, rating} = props;
+  const labelwater = floatToChar(labels?.labelwater);
+  const labelCO2 = floatToChar(labels?.labelCO2);
   return (
     <Column>
       <Row width="100%" justifyContent="space-between">
-        <Text>Consumo de agua (<Text bold color={colors[labelwater]}>{labelwater.toUpperCase() || nullText}</Text>):</Text>
+        <Text>Consumo de agua (<Text bold color={colors[labelwater]}>{(labelwater || nullText).toUpperCase()}</Text>):</Text>
         <Text>{`${(rating.water || 0).toFixed(2)} L/u`}</Text>
       </Row>
       <Divider my={2} />
       <Row width="100%" justifyContent="space-between">
-        <Text>Emisión de CO2 (<Text bold color={colors[labelCO2]}>{labelCO2.toUpperCase() || nullText}</Text>):</Text>
+        <Text>Emisión de CO2 (<Text bold color={colors[labelCO2]}>{(labelCO2 || nullText).toUpperCase()}</Text>):</Text>
         <Text>{`${(rating.CO2 || 0).toFixed(2)} Kg/u`}</Text>
       </Row>
       <Divider my={2} />
-      <Text>{`Afecta a la deforestación: ${rating.deforestation || nullText}`}</Text>
+      <Text>{`Afecta a la deforestación: ${intToDeforestation[rating.deforestation] || nullText}`}</Text>
     </Column>
   );
 }
 
 export const ProductInfo = (props) => {
   const { product: {
-    globalLabels,
-    categoryLabels,
-    ratingData,
+    globalLabels = {},
+    categoryLabels = {},
+    ratingData = {},
     company,
     name,
   },
   } = props;
   const {
     name: nameCompany,
-    rating: ratingCompany,
-    labels: companyLabels,
+    rating: ratingCompany = {},
+    labels: companyLabels = {},
     certificates,
   } = company;
   const [typeResult, setTypeResult] = useState(0);

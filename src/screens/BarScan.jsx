@@ -36,10 +36,14 @@ const styles = StyleSheet.create({
   },
 });
 
+const numberToType = (number) => {
+  return Object.keys(Constants.BarCodeType).find(key => Constants.BarCodeType[key] === number);
+}
+
 export const BarScan = (props) => {
   const { navigation } = props;
   const [hasPermission, setHasPermission] = useState(null);
-  const [barCode, setBarCode] = useState('');
+  const [barCode, setBarCode] = useState({});
   const [cameraType, setCameraType] = useState(Constants.Type.back);
 
   useEffect(() => {
@@ -49,18 +53,16 @@ export const BarScan = (props) => {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = (data) => {
     setBarCode(data);
   };
 
   const handleSearchBarCode = () => {
-    navigation.push('Producto', { searching: { barCode: "1296602705774", barCodeType: "ean13" } });
-    // getProduct({ variables: { id: '123456789' } });
-    // if (barCode !== '') {
-    //   getProduct({ variables: { id: barCode } });
-    // } else {
-    //   alert(`Error, no se ingreso un código!`);
-    // }
+    if (!(Object.keys(barCode).length === 0 && barCode.constructor === Object)) {
+      const { type, data } = barCode;
+      console.log(barCode);
+      navigation.push('Producto', { searching: { barCode: data, barCodeType: numberToType(type) } });
+    }
   };
 
   const handleCameraType = () => {
@@ -85,7 +87,7 @@ export const BarScan = (props) => {
       >
         <View style={styles.container}>
           <View style={styles.boxSection}>
-            <Text style={styles.text}>{barCode || 'sin resultados...'}</Text>
+            <Text style={styles.text}>{barCode.data || 'sin resultados...'}</Text>
           </View>
           <View style={styles.buttonsSection}>
             <View
