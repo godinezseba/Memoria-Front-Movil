@@ -14,9 +14,6 @@ query GetProducts($ids: [ID]){
     globalLabels {
       label
     }
-    categoryLabels {
-      label
-    }
     company {
       name
     }
@@ -39,17 +36,10 @@ export function History() {
       });
   }, []);
 
-  if (loading)
-    return (
-      <Center flex={1}>
-        <Spinner accessibilityLabel="Cargando productos" />
-      </Center>
-    );
-
-  const { products } = data || {};
+  const { products = [] } = data || {};
   if (products)
     return (
-      <ProductList products={products} />
+      <ProductList products={products} loading={loading} />
     );
 
   return (

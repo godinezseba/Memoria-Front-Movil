@@ -54,7 +54,7 @@ export const BarScan = (props) => {
   };
 
   const handleSearchBarCode = () => {
-    navigation.push('Producto', { productId: '61271b4f94e6cdbf15701104' });
+    navigation.push('Producto', { searching: { barCode: "1296602705774", barCodeType: "ean13" } });
     // getProduct({ variables: { id: '123456789' } });
     // if (barCode !== '') {
     //   getProduct({ variables: { id: barCode } });
