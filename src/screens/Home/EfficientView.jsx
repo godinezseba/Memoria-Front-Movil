@@ -13,9 +13,6 @@ query {
     globalLabels {
       label
     }
-    categoryLabels {
-      label
-    }
     company {
       name
     }
@@ -26,13 +23,6 @@ query {
 export function EfficientView() {
   const { loading, data, error } = useQuery(GET_PRODUCTS);
 
-  if (loading)
-    return (
-      <Center flex={1}>
-        <Spinner accessibilityLabel="Cargando productos" />
-      </Center>
-    );
-
   if (error)
     return (
       <Center flex={1}>
@@ -40,8 +30,8 @@ export function EfficientView() {
       </Center>
     )
 
-  const { products } = data;
+  const { products = [] } = data || {};
   return (
-    <ProductList products={products.slice(0, 20)} />
+    <ProductList products={products.slice(0, 20)} loading={loading} />
   );
 }
