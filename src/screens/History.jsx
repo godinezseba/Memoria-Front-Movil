@@ -14,9 +14,6 @@ query GetProducts($ids: [ID]){
     globalLabels {
       label
     }
-    categoryLabels {
-      label
-    }
     company {
       name
     }
