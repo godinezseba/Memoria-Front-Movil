@@ -26,7 +26,7 @@ export const HomeHeader = ({ navigation }) => {
           />
           <IconButton
             colorScheme="gray"
-            icon={<Icon as={Ionicons} name="barcode-sharp" color="gray.500" />}
+            icon={<Icon as={Ionicons} name="camera-outline" color="gray.500" />}
             onPress={() => navigation.push("BarScan")}
           />
         </Row>
