@@ -8,34 +8,6 @@ import {
 } from 'react-native';
 import { BarCodeScanner, Constants } from 'expo-barcode-scanner';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    margin: 30,
-  },
-  boxSection: {
-    width: '100%',
-  },
-  text: {
-    color: 'red',
-  },
-  buttonsSection: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  cameraButton: {
-    alignItems: 'center',
-    backgroundColor: 'transparent'
-  },
-  iconButton: {
-    color: '#fff',
-    fontSize: 40,
-  },
-});
-
 const numberToType = (number) => {
   return Object.keys(Constants.BarCodeType).find(key => Constants.BarCodeType[key] === number);
 }
@@ -79,46 +51,103 @@ export const BarScan = (props) => {
   }
 
   return (
-    <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'black' }}>
-      <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-        type={cameraType}
-      >
-        <View style={styles.container}>
-          <View style={styles.boxSection}>
-            <Text style={styles.text}>{barCode.data || 'sin resultados...'}</Text>
-          </View>
-          <View style={styles.buttonsSection}>
-            <View
-              style={styles.cameraButton}
-            >
-              <Ionicons
-                name="copy-outline"
-                style={{ ...styles.iconButton, opacity: 0 }}
-              />
-            </View>
-            <TouchableOpacity
-              style={styles.cameraButton}
-              onPress={handleSearchBarCode}
-            >
-              <FontAwesome
-                name="camera"
-                style={styles.iconButton}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.cameraButton}
-              onPress={handleCameraType}
-            >
-              <MaterialCommunityIcons
-                name="camera-switch"
-                style={styles.iconButton}
-              />
-            </TouchableOpacity>
-          </View>
+    <BarCodeScanner
+      onBarCodeScanned={handleBarCodeScanned}
+      style={[StyleSheet.absoluteFill, styles.container]}
+      type={cameraType}
+    >
+      <View style={styles.layerTop} />
+      <View style={styles.layerCenter}>
+        <View style={styles.layerLeft} />
+        <View style={styles.focused}>
+          <Text style={styles.text}>{barCode.data || 'sin resultados...'}</Text>
         </View>
-      </BarCodeScanner>
-    </View>
+        <View style={styles.layerRight} />
+      </View>
+      <View style={styles.layerBottom}>
+        <View style={styles.layerBottomUp} />
+        <View style={styles.buttonsSection}>
+          <View
+            style={styles.cameraButton}
+          >
+            <Ionicons
+              name="copy-outline"
+              style={{ ...styles.iconButton, opacity: 0 }}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.cameraButton}
+            onPress={handleSearchBarCode}
+          >
+            <FontAwesome
+              name="camera"
+              style={styles.iconButton}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cameraButton}
+            onPress={handleCameraType}
+          >
+            <MaterialCommunityIcons
+              name="camera-switch"
+              style={styles.iconButton}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </BarCodeScanner>
   );
 }
+
+const opacity = 'rgba(0, 0, 0, .6)';
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'black',
+  },
+  layerTop: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  layerCenter: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  layerLeft: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  focused: {
+    flex: 10
+  },
+  text: {
+    color: 'red',
+  },
+  layerRight: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  layerBottom: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  layerBottomUp: {
+    flex: 2,
+  },
+  buttonsSection: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 10,
+  },
+  cameraButton: {
+    alignItems: 'center',
+    backgroundColor: 'transparent'
+  },
+  iconButton: {
+    color: '#fff',
+    fontSize: 40,
+  },
+});
