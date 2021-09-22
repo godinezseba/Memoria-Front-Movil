@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
 import { Heading, Spinner, Center } from 'native-base';
 import { gql, useQuery } from '@apollo/client';
 import PDFReader from 'rn-pdf-reader-js';

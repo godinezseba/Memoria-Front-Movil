@@ -1,9 +1,9 @@
 export const colors = {
-  'a': '#63aa5a',
-  'b': '#ffe731',
-  'c': '#fbb900',
-  'd': '#fb8800',
-  'e': '#e30613',
+  'a': '#00FF00',
+  'b': '#80FF00',
+  'c': '#FFFF00',
+  'd': '#FF8000',
+  'e': '#FF0000',
 }
 
 export const letters = ['a', 'b', 'c', 'd', 'e'];

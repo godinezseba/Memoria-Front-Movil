@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Spinner, Text, Center } from 'native-base';
+import { Text, Center } from 'native-base';
 import { gql, useLazyQuery } from '@apollo/client';
 
 import { ProductList } from '../components';

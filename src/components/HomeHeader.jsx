@@ -23,11 +23,13 @@ export const HomeHeader = ({ navigation }) => {
             InputLeftElement={<Icon size='sm' ml={2} size={5} color="gray.400" as={<Ionicons name="ios-search" />} />}
             value={searchName}
             onChangeText={setSearchName}
+            onEndEditing={() => navigation.push('Busqueda', { searchName })}
+            keyboardType="web-search"
           />
           <IconButton
             colorScheme="gray"
             icon={<Icon as={Ionicons} name="camera-outline" color="gray.500" />}
-            onPress={() => navigation.push("BarScan")}
+            onPress={() => navigation.push('BarScan')}
           />
         </Row>
       </Column>
