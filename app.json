@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "demo-camera",
-    "slug": "demo-camera",
+    "name": "Memoria App",
+    "slug": "memoria-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,7 +23,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.memoria.movilapp",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
