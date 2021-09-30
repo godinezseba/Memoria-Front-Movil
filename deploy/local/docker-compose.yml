@@ -15,6 +15,6 @@ services:
       - '19002:19002'
       - '19006:19006'
     environment:
-      - API_URL=${API_URL:-http://192.168.1.96:8081/v2/graphql}
+      - API_URL=${API_URL}
     healthcheck:
       disable: true
