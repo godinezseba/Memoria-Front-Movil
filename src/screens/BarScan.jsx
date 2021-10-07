@@ -32,7 +32,6 @@ export const BarScan = (props) => {
   const handleSearchBarCode = () => {
     if (!(Object.keys(barCode).length === 0 && barCode.constructor === Object)) {
       const { type, data } = barCode;
-      console.log(barCode);
       navigation.push('Producto', { searching: { barCode: data, barCodeType: numberToType(type) } });
     }
   };

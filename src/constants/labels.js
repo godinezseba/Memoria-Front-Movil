@@ -13,7 +13,7 @@ export const floatToChar = (number) => {
   if (number < 2.5) return 'b';
   if (number < 3.5) return 'c';
   if (number < 4.5) return 'd';
-  if (number > 5) return 'e';
+  if (number >= 5) return 'e';
   return null;
 }
 
