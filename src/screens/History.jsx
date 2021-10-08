@@ -44,7 +44,7 @@ export function History() {
 
   return (
     <Center flex={1}>
-      <Text>Aun no buscas productos!</Text>
+      <Text maxW={300}>Aún no buscas productos!</Text>
     </Center>
   );
 };

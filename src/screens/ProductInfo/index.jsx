@@ -131,11 +131,10 @@ export const Product = ({ route }) => {
         }
       },
     });
-
   if (error)
     return (
       <Center flex={1}>
-        <Text mt={3}>Error al buscar el producto </Text>
+        <Text maxW={300}>Error al buscar el producto </Text>
       </Center>
     );
 
@@ -158,6 +157,13 @@ export const Product = ({ route }) => {
     return (
       <ProductInfo product={products[0]} />
     );
+  }
+  if (products.length === 0) {
+    return (
+      <Center flex={1}>
+        <Text maxW={300}> No fue posible encontrar productos con el siguiente código de barras: {searching.barCode} </Text>
+      </Center>
+    )
   }
   return (
     <ProductList products={products} />

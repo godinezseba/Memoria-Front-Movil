@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { Spinner, Center } from 'native-base';
 import { BarCodeScanner, Constants } from 'expo-barcode-scanner';
 
 const numberToType = (number) => {
@@ -43,10 +44,18 @@ export const BarScan = (props) => {
   }
 
   if (hasPermission === null) {
-    return <Text> Requesting for camera permission </Text>;
+    return (
+      <Center flex={1}>
+        <Spinner accessibilityLabel="Cargando producto" />
+      </Center>
+    );
   }
   else if (hasPermission === false) {
-    return <Text> No access to camera </Text>;
+    return (
+      <Center flex={1}>
+        <Spinner accessibilityLabel="Cargando producto" />
+      </Center>
+    );
   }
 
   return (
